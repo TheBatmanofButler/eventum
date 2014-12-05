@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Events for the week</title>
+</head>
+<body>
+	New Events
+
+	{% for event in events %}
+		Title: {{ event.title }}
+		Location: {{ event.location }}
+		Start: {{ event.start_time.strftime('%-I:%M %p') }}, {{ event.start_date.strftime('%b %d, %Y') }}
+		End: {{ event.end_time.strftime('%-I:%M %p') }}, {{ event.end_date.strftime('%b %d, %Y') }}
+		Creator: {{ event.creator.name }}
+		Contact: {{ event.creator.email }}
+		Short Description: {{ event.short_description }}
+	{% endfor %}
+</body>
+</html>
