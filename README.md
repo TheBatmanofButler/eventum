@@ -155,6 +155,7 @@ nosetests
 ├── config           # Configuration files
 ├── data             # Backup data
 ├── manage.py        # Various scripts.  Run `python manage.py` to view usage.
+├── authorize.py        # Authorization script.  Run `python authorize.py` to authorize the Google Calendar API Client.
 ├── run.py           # Runs the app!
 ├── script           # Scripts run by `manage.py` outside of the app
 ├── test             # Unit tests

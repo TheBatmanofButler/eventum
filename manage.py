@@ -1,36 +1,16 @@
-import argparse
 from sys import argv, exit
-
-import gflags
-from oauth2client.file import Storage
-from oauth2client.client import flow_from_clientsecrets
-from oauth2client.tools import run_flow
-from oauth2client import tools
-
-from config import flask_config
-from script import backfill_blog, import_images
-
-parser = argparse.ArgumentParser(parents=[tools.argparser])
-FLAGS = parser.parse_args()
-
-def authorize_google_calendar():
-    FLOW = flow_from_clientsecrets(flask_config.INSTALLED_APP_SECRET_PATH,
-                   scope='https://www.googleapis.com/auth/calendar')
-
-    # Save the credentials file here for use by the app
-    storage = Storage(flask_config.INSTALLED_APP_CREDENTIALS_PATH)
-    run_flow(FLOW, storage, FLAGS)
+from script import backfill_blog, import_images, generate_email
 
 def print_usage():
     print "Usage:"
-    print "%s --authorize (-a)     Authorize the Google Calendar API Client" % argv[0]
     print "%s --backfill-blog (-b) Backfill blog posts from data/jekyll-posts" % argv[0]
     print "%s --import-images (-i) Import images from data/jekyll-images" % argv[0]
+    print "%s --generate-email (-e) Generate email containing event information" % argv[0]
 
 if __name__ == '__main__':
     if '--backfill-blog' in argv or '-b' in argv:
         backfill_blog.backfill_from_jekyll('data/old-website-data/posts')
     elif '--import-images' in argv or '-i' in argv:
-        import_images.import_from_directory('data/old-website-data/images')
-    else:
-        authorize_google_calendar()
+        import_images.import_from_directory('data/jekyll-images')
+    elif '--generate-email' in argv or '-e' in argv:
+        generate_email.generate_events_email()

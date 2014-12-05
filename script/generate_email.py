@@ -10,7 +10,6 @@ def generate_events_email(emails_path):
 	today_weekday = datetime.date.today().weekday()
 
 	date_start = datetime.date.today()-datetime.timedelta(today_weekday+1)
-	print date_start, date_start+datetime.timedelta(7)
 
 	events = []
 	for each_event in Event.objects():

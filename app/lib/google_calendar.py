@@ -50,7 +50,7 @@ class GoogleCalendarAPIClient():
         """Create and return the Google Calendar service object, using the
         credentials file generated through the command::
 
-            python manage.py --authorize
+            python authorize.py
 
         The service object is used to make API requests to Google Calendar, but
         will raise IOError if the credentials file is not generated
